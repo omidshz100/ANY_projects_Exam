@@ -1,0 +1,295 @@
+🔹 Section 1: Power BI Fundamentals
+
+1. What does KPI stand for in Power BI?  
+   a) Key Performance Indicator  
+   b) Knowledge Processing Index  
+   c) Key Planning Input  
+   d) Knowledge Performance Insight  
+   ✅ Correct Answer: a
+
+2. Which tool in Power BI is used for data transformation?  
+   a) Power View  
+   b) Power Query  
+   c) Power Pivot  
+   d) Power Map  
+   ✅ Correct Answer: b
+
+3. What does DAX stand for in Power BI?  
+   a) Data Analysis Expressions  
+   b) Database Access eXtension  
+   c) Data Aggregation Explorer  
+   d) Dynamic Analytical Xpression  
+   ✅ Correct Answer: a
+
+4. Which of the following allows you to create interactive reports and dashboards in Power BI?  
+   a) Power Query  
+   b) Power BI Desktop  
+   c) Power Automate  
+   d) Power Apps  
+   ✅ Correct Answer: b
+
+5. Where can you find built-in aggregations like SUM, COUNT, and AVERAGE in Power BI?  
+   a) Power Query Editor  
+   b) Report view  
+   c) Data view  
+   d) Model view  
+   ✅ Correct Answer: b
+
+🔹 Section 2: Visualizations & Dashboards
+
+6. Which visualization is best suited for showing trends over time?  
+   a) Pie chart  
+   b) Line chart  
+   c) Card  
+   d) Funnel chart  
+   ✅ Correct Answer: b
+
+7. How can you filter data by geographic location in Power BI?  
+   a) Use a slicer  
+   b) Use a map chart  
+   c) Use a matrix  
+   d) Use a table  
+   ✅ Correct Answer: b
+
+8. What happens when you click on a state in a map visualization with sales data?  
+   a) It exports the report  
+   b) It zooms out automatically  
+   c) It shows total sales for that state  
+   d) It resets the dashboard  
+   ✅ Correct Answer: c
+
+9. Which of the following is NOT a feature of Power BI dashboards?  
+   a) Can contain multiple pages  
+   b) Can be shared with others  
+   c) Contains visuals from one report only  
+   d) Supports real-time data updates  
+   ✅ Correct Answer: c
+
+10. Which visual would you use to display a single value like total profit or average cost?  
+   a) Table  
+   b) Card  
+   c) Bar chart  
+   d) Matrix  
+   ✅ Correct Answer: b
+
+🔹 Section 3: Data Modeling & DAX
+
+11. What is DAX primarily used for in Power BI?  
+   a) Cleaning raw data  
+   b) Creating calculated columns and measures  
+   c) Importing external data  
+   d) Designing dashboards  
+   ✅ Correct Answer: b
+
+12. Which DAX function returns the sum of a column?  
+   a) SUMMARIZE  
+   b) CALCULATE  
+   c) SUM  
+   d) FILTER  
+   ✅ Correct Answer: c
+
+13. Which DAX function is often used with filters to modify context?  
+   a) SUM  
+   b) AVERAGE  
+   c) CALCULATE  
+   d) DISTINCT  
+   ✅ Correct Answer: c
+
+14. What is a calculated table in Power BI?  
+   a) A table imported from an external source  
+   b) A table created using DAX expressions  
+   c) A table that cannot be modified  
+   d) A table that contains only static values  
+   ✅ Correct Answer: b
+
+15. Which of the following is a time intelligence function in DAX?  
+   a) TODAY()  
+   b) NEXTDAY()  
+   c) MAX()  
+   d) MIN()  
+   ✅ Correct Answer: b
+
+🔹 Section 4: Power Query
+
+16. What is the primary purpose of Power Query in Power BI?  
+   a) To create reports  
+   b) To transform and clean data before loading  
+   c) To build relationships between tables  
+   d) To write DAX formulas  
+   ✅ Correct Answer: b
+
+17. Which of the following actions can you perform in Power Query?  
+   a) Create visualizations  
+   b) Remove duplicates  
+   c) Publish dashboards  
+   d) Schedule data refresh  
+   ✅ Correct Answer: b
+
+18. How do you apply a filter in Power Query?  
+   a) Right-click on a visual  
+   b) Click the dropdown arrow next to a column header  
+   c) Use the DAX editor  
+   d) Select "Publish" from the menu  
+   ✅ Correct Answer: b
+
+19. Which file format can be directly imported into Power BI using Power Query?  
+   a) .txt  
+   b) .csv  
+   c) .xlsx  
+   d) All of the above  
+   ✅ Correct Answer: d
+
+20. What is the term used for combining multiple queries into one in Power Query?  
+   a) Merging  
+   b) Appending  
+   c) Filtering  
+   d) Sorting  
+   ✅ Correct Answer: b
+
+🔹 Section 5: Filters & Interactivity
+
+21. What is a slicer in Power BI?  
+   a) A type of chart  
+   b) A filtering control  
+   c) A dashboard page  
+   d) A data model relationship  
+   ✅ Correct Answer: b
+
+22. Which of the following allows filtering data by date ranges interactively?  
+   a) Timeline slicer  
+   b) Drop-down list  
+   c) Table  
+   d) Card  
+   ✅ Correct Answer: a
+
+23. What happens when you select a visual in a report with cross-filtering enabled?  
+   a) The other visuals are hidden  
+   b) Other visuals update based on the selected data  
+   c) The dashboard resets  
+   d) The report enters edit mode  
+   ✅ Correct Answer: b
+
+24. Which view in Power BI lets you see how filters affect your data?  
+   a) Data view  
+   b) Model view  
+   c) Report view  
+   d) All of the above  
+   ✅ Correct Answer: d
+
+25. What is the difference between a slicer and a filter in Power BI?  
+   a) Slicers are visible to users; filters are not  
+   b) Filters are visible to users; slicers are not  
+   c) There is no difference  
+   d) Slicers can only be applied to numeric data  
+   ✅ Correct Answer: a
+
+🔹 Section 6: Advanced Features
+
+26. What is the purpose of the "Model" view in Power BI?  
+   a) To create visuals  
+   b) To manage relationships between tables  
+   c) To write DAX code  
+   d) To publish reports  
+   ✅ Correct Answer: b
+
+27. Which feature allows you to combine data from multiple sources in Power BI?  
+   a) Power Query  
+   b) DAX  
+   c) Relationships  
+   d) All of the above  
+   ✅ Correct Answer: d
+
+28. Which of the following is true about implicit vs explicit measures in DAX?  
+   a) Implicit measures are created manually  
+   b) Explicit measures are created manually  
+   c) Both are the same  
+   d) Implicit measures cannot be edited  
+   ✅ Correct Answer: b
+
+29. What is the main benefit of using bookmarks in Power BI?  
+   a) They allow you to save specific views of a report  
+   b) They connect to live data  
+   c) They export data to Excel  
+   d) They create new visuals  
+   ✅ Correct Answer: a
+
+30. Which Power BI feature allows you to tell a story using data?  
+   a) Bookmarks  
+   b) Tooltips  
+   c) Reports  
+   d) Dashboards  
+   ✅ Correct Answer: a
+
+🔹 Section 7: Best Practices & Learning
+
+31. Why is hands-on practice recommended for learning Power BI?  
+   a) It's easier than reading documentation  
+   b) Real-world scenarios often require problem-solving without instructions  
+   c) It’s faster than watching videos  
+   d) It guarantees certification  
+   ✅ Correct Answer: b
+
+32. Which of the following should you master first when learning Power BI?  
+   a) DAX  
+   b) Power Query  
+   c) Dashboard creation  
+   d) Data modeling  
+   ✅ Correct Answer: c
+
+33. What is one way to improve dashboard usability for end users?  
+   a) Reduce the number of visuals  
+   b) Add too many filters  
+   c) Use complex DAX expressions  
+   d) Hide all slicers  
+   ✅ Correct Answer: a
+
+34. What is a common mistake when creating Power BI dashboards?  
+   a) Using too few visuals  
+   b) Overloading with too much information  
+   c) Publishing without testing  
+   d) Both b and c  
+   ✅ Correct Answer: d
+
+35. Which of the following tools is best for beginners in Power BI?  
+   a) DAX Studio  
+   b) Power Query  
+   c) Power BI Report Builder  
+   d) SQL Server Management Studio  
+   ✅ Correct Answer: b
+
+🔹 Section 8: Miscellaneous
+
+36. What is the main difference between a report and a dashboard in Power BI?  
+   a) Reports can have multiple pages; dashboards cannot  
+   b) Dashboards can have multiple pages; reports cannot  
+   c) Reports are static; dashboards are dynamic  
+   d) There is no difference  
+   ✅ Correct Answer: a
+
+37. Which Power BI service allows sharing of dashboards and reports?  
+   a) Power BI Desktop  
+   b) Power BI Service  
+   c) Power BI Mobile  
+   d) Power BI Report Builder  
+   ✅ Correct Answer: b
+
+38. Which of the following is a valid method to publish a Power BI report?  
+   a) Save it locally  
+   b) Export it as PDF  
+   c) Upload it to Power BI Service  
+   d) Print it  
+   ✅ Correct Answer: c
+
+39. What is the purpose of a tooltip in Power BI?  
+   a) To hide data  
+   b) To show additional context when hovering over a visual  
+   c) To delete visuals  
+   d) To rename reports  
+   ✅ Correct Answer: b
+
+40. Which of the following is NOT a supported data source in Power BI?  
+   a) Excel  
+   b) SQL Server  
+   c) Google Sheets  
+   d) Notepad (.txt)  
+   ✅ Correct Answer: None of the above (all are supported)

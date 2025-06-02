@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL MCQ Practice – All Questions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f8f9fa; color: #222; }
+    .container { max-width: 900px; margin: 2rem auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 2rem; }
+    h1 { text-align: center; margin-bottom: 1.5rem; }
+    .question-block { margin-bottom: 2rem; padding: 1rem 1.5rem; border-left: 4px solid #0074d9; background: #f4f8fb; border-radius: 4px; }
+    .question-text { font-weight: 500; margin-bottom: 0.7rem; }
+    .options { margin-bottom: 0.5rem; }
+    .option { display: block; margin: 0.2rem 0; padding: 0.4rem 0.8rem; border-radius: 3px; cursor: pointer; border: 1px solid transparent; }
+    .option.selected { background: #eaf6ff; border-color: #0074d9; }
+    .feedback { margin-top: 0.5rem; font-weight: bold; }
+    .correct { color: #27ae60; }
+    .incorrect { color: #c0392b; }
+    @media (max-width: 600px) {
+      .container { padding: 0.7rem; }
+      .question-block { padding: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SQL MCQ Practice – All Questions</h1>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">1. What is the main purpose of the LISTAGG function in SQL?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) To calculate the average of values</span>
+        <span class="option" data-option="B">B) To concatenate strings from multiple rows into a single string</span>
+        <span class="option" data-option="C">C) To count the number of rows</span>
+        <span class="option" data-option="D">D) To filter rows based on conditions</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">2. Which clause is used with LISTAGG to sort values before concatenation?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) HAVING</span>
+        <span class="option" data-option="B">B) WHERE</span>
+        <span class="option" data-option="C">C) WITHIN GROUP (ORDER BY)</span>
+        <span class="option" data-option="D">D) USING</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">3. In which database schema were the queries demonstrated?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Sales Schema</span>
+        <span class="option" data-option="B">B) HR Schema</span>
+        <span class="option" data-option="C">C) Inventory Schema</span>
+        <span class="option" data-option="D">D) Finance Schema</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">4. What does the LEFT JOIN do in SQL?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Returns only matching rows</span>
+        <span class="option" data-option="B">B) Returns all rows from the right table</span>
+        <span class="option" data-option="C">C) Returns all rows from the left table and matching rows from the right</span>
+        <span class="option" data-option="D">D) Joins tables without any condition</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="A">
+      <div class="question-text">5. Why might some departments show no employee names in the output?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) They have no employees</span>
+        <span class="option" data-option="B">B) The query has an error</span>
+        <span class="option" data-option="C">C) The JOIN was incorrect</span>
+        <span class="option" data-option="D">D) The ORDER BY failed</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">6. What is the primary difference between AVG() and LISTAGG()?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) AVG() works faster than LISTAGG()</span>
+        <span class="option" data-option="B">B) AVG() calculates averages while LISTAGG() combines strings</span>
+        <span class="option" data-option="C">C) AVG() can be used in joins but LISTAGG() cannot</span>
+        <span class="option" data-option="D">D) AVG() requires a GROUP BY, but LISTAGG() does not</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="A">
+      <div class="question-text">7. What is the correct syntax to use LISTAGG to combine last names separated by commas?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) LISTAGG(e.last_name, ', ') WITHIN GROUP (ORDER BY e.last_name)</span>
+        <span class="option" data-option="B">B) LISTAGG(e.last_name, ', ') ORDER BY e.last_name</span>
+        <span class="option" data-option="C">C) LISTAGG(e.last_name) + ', ' + ORDER BY e.last_name</span>
+        <span class="option" data-option="D">D) e.last_name.LISTAGG(', ')</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">8. Which of the following is NOT a valid reason for using LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) To display a list of employees per department</span>
+        <span class="option" data-option="B">B) To generate reports showing aggregated textual data</span>
+        <span class="option" data-option="C">C) To calculate total salaries per department</span>
+        <span class="option" data-option="D">D) To combine names into one field</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">9. What happens if you omit the ORDER BY inside WITHIN GROUP in LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) The query will fail</span>
+        <span class="option" data-option="B">B) Names will be concatenated in random order</span>
+        <span class="option" data-option="C">C) Names will be sorted alphabetically by default</span>
+        <span class="option" data-option="D">D) No results will be returned</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">0. What is the purpose of the GROUP BY clause in this context?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) To remove duplicate rows</span>
+        <span class="option" data-option="B">B) To group results by department name for aggregation</span>
+        <span class="option" data-option="C">C) To filter out empty departments</span>
+        <span class="option" data-option="D">D) To rename columns</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">1. What is the most important factor when choosing between SQL functions?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Readability</span>
+        <span class="option" data-option="B">B) Correctness</span>
+        <span class="option" data-option="C">C) Efficiency (execution time)</span>
+        <span class="option" data-option="D">D) Length of code</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">2. What does Antonio mean when he says there is no “wrong” function?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) All functions return the same result</span>
+        <span class="option" data-option="B">B) Any function can be used interchangeably</span>
+        <span class="option" data-option="C">C) Some functions are more efficient than others</span>
+        <span class="option" data-option="D">D) Only beginners make mistakes</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="D">
+      <div class="question-text">3. Why is execution speed important in real-world applications?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Faster queries look better</span>
+        <span class="option" data-option="B">B) Users prefer quick responses</span>
+        <span class="option" data-option="C">C) Companies care about performance at scale</span>
+        <span class="option" data-option="D">D) Both B and C</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">4. What tool or platform is mentioned as possibly allowing visibility into others' code?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) GitHub</span>
+        <span class="option" data-option="B">B) Jupyter Notebook</span>
+        <span class="option" data-option="C">C) Shared Colab Pages</span>
+        <span class="option" data-option="D">D) Power BI</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="D">
+      <div class="question-text">5. What is the expected outcome of running a poorly optimized query in production?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It may cause system crashes</span>
+        <span class="option" data-option="B">B) It may take too long to execute</span>
+        <span class="option" data-option="C">C) It may return incorrect results</span>
+        <span class="option" data-option="D">D) Both A and B</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">6. How much time did Antonio give participants to complete a task during the session?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) 1 minute</span>
+        <span class="option" data-option="B">B) 3 minutes</span>
+        <span class="option" data-option="C">C) 5 minutes</span>
+        <span class="option" data-option="D">D) 10 minutes</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">7. What was planned after completing current exercises?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Watch a movie</span>
+        <span class="option" data-option="B">B) Take a 10-minute break</span>
+        <span class="option" data-option="C">C) End the class</span>
+        <span class="option" data-option="D">D) Call parents</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">8. What was mentioned as being shown after the lesson?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) A quiz</span>
+        <span class="option" data-option="B">B) A video presentation</span>
+        <span class="option" data-option="C">C) A game</span>
+        <span class="option" data-option="D">D) A test</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">9. Who would receive final project instructions according to Antonio?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Everyone</span>
+        <span class="option" data-option="B">B) Remote students</span>
+        <span class="option" data-option="C">C) Those present in the session</span>
+        <span class="option" data-option="D">D) Teachers only</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">0. Why did Antonio say it was difficult to respond to remote students?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) He didn't like them</span>
+        <span class="option" data-option="B">B) It's harder to manage communication and support</span>
+        <span class="option" data-option="C">C) Internet issues</span>
+        <span class="option" data-option="D">D) He forgot their emails</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">1. Which two tables were joined in the example query?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) employees and customers</span>
+        <span class="option" data-option="B">B) departments and employees</span>
+        <span class="option" data-option="C">C) departments and projects</span>
+        <span class="option" data-option="D">D) employees and salaries</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">2. What column was used to join the departments and employees tables?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) employee_id</span>
+        <span class="option" data-option="B">B) department_id</span>
+        <span class="option" data-option="C">C) manager_id</span>
+        <span class="option" data-option="D">D) job_id</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">3. Which department had the surname "Way" listed under it?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Accounting</span>
+        <span class="option" data-option="B">B) Benefits</span>
+        <span class="option" data-option="C">C) Administration</span>
+        <span class="option" data-option="D">D) Corporate Tax</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">4. Which departments had no associated surnames in the output?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Accounting and Administration</span>
+        <span class="option" data-option="B">B) Benefits and Construction Contracting</span>
+        <span class="option" data-option="C">C) Sales and Marketing</span>
+        <span class="option" data-option="D">D) None</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">5. What could be a reason for missing employee names in some departments?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Typos in names</span>
+        <span class="option" data-option="B">B) Missing data in the database</span>
+        <span class="option" data-option="C">C) Incorrect joins</span>
+        <span class="option" data-option="D">D) Too many employees</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">6. What language did Antonio mix with English during the session?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Spanish</span>
+        <span class="option" data-option="B">B) French</span>
+        <span class="option" data-option="C">C) Italian</span>
+        <span class="option" data-option="D">D) Portuguese</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="A">
+      <div class="question-text">7. What phrase did Antonio likely mispronounce as "sirname"?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Surname</span>
+        <span class="option" data-option="B">B) Sir Name</span>
+        <span class="option" data-option="C">C) Serial Number</span>
+        <span class="option" data-option="D">D) Sign Name</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">8. What did Antonio mean by "di squareing"?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Referring to geometry</span>
+        <span class="option" data-option="B">B) Possibly referring to finishing up tasks or wrapping things up</span>
+        <span class="option" data-option="C">C) An unknown term</span>
+        <span class="option" data-option="D">D) A joke</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">9. What did Antonio ask participants to do during interactive segments?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Leave the room</span>
+        <span class="option" data-option="B">B) Write or type (Scrivi)</span>
+        <span class="option" data-option="C">C) Watch videos</span>
+        <span class="option" data-option="D">D) Sleep</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">0. What did Antonio mention about the final project explanation?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It would be recorded</span>
+        <span class="option" data-option="B">B) It would be sent to everyone</span>
+        <span class="option" data-option="C">C) It would only be given to those present</span>
+        <span class="option" data-option="D">D) It wouldn’t happen</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">1. What is the effect of using ORDER BY in WITHIN GROUP with LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Slows down the query</span>
+        <span class="option" data-option="B">B) Sorts the values before concatenating</span>
+        <span class="option" data-option="C">C) Filters the data</span>
+        <span class="option" data-option="D">D) Changes the delimiter</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">2. What is the role of the delimiter in LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It speeds up the query</span>
+        <span class="option" data-option="B">B) It determines how values are separated</span>
+        <span class="option" data-option="C">C) It hides the data</span>
+        <span class="option" data-option="D">D) It sorts the data</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">3. What does the SELECT statement include in the sample query?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Only the department ID</span>
+        <span class="option" data-option="B">B) Department name and aggregated employee names</span>
+        <span class="option" data-option="C">C) Only the employee ID</span>
+        <span class="option" data-option="D">D) Salary information</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">4. What is the significance of aliasing (d, e) in SQL queries?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It makes the query longer</span>
+        <span class="option" data-option="B">B) It improves readability and simplifies referencing tables</span>
+        <span class="option" data-option="C">C) It changes the output</span>
+        <span class="option" data-option="D">D) It is required by Oracle</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">5. What is the benefit of ordering the final result by department name?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Makes the query faster</span>
+        <span class="option" data-option="B">B) Helps users scan results alphabetically</span>
+        <span class="option" data-option="C">C) Hides empty departments</span>
+        <span class="option" data-option="D">D) Prevents errors</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">6. In what kind of report might LISTAGG be especially useful?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Payroll report</span>
+        <span class="option" data-option="B">B) Employee directory per department</span>
+        <span class="option" data-option="C">C) Financial budget</span>
+        <span class="option" data-option="D">D) Product sales</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="A">
+      <div class="question-text">7. What is one limitation of LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It doesn’t work with numbers</span>
+        <span class="option" data-option="B">B) It can’t handle large datasets</span>
+        <span class="option" data-option="C">C) It can only be used once per query</span>
+        <span class="option" data-option="D">D) It returns only one row</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">8. What should be considered when selecting delimiters in LISTAGG?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Font size</span>
+        <span class="option" data-option="B">B) Readability and format compatibility</span>
+        <span class="option" data-option="C">C) Color scheme</span>
+        <span class="option" data-option="D">D) Line spacing</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="B">
+      <div class="question-text">9. Why might a developer choose LISTAGG over other functions for text aggregation?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) It’s the only option</span>
+        <span class="option" data-option="B">B) It's specifically designed for combining strings</span>
+        <span class="option" data-option="C">C) It’s faster than all others</span>
+        <span class="option" data-option="D">D) It looks cleaner</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+    <div class="question-block" data-answer="C">
+      <div class="question-text">0. What does Antonio encourage students to do during live demonstrations?</div>
+      <div class="options">
+        <span class="option" data-option="A">A) Skip ahead</span>
+        <span class="option" data-option="B">B) Watch passively</span>
+        <span class="option" data-option="C">C) Engage actively by writing code</span>
+        <span class="option" data-option="D">D) Ask unrelated questions</span>
+      </div>
+      <div class="feedback"></div>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.question-block').forEach(function(block) {
+      const options = block.querySelectorAll('.option');
+      const feedback = block.querySelector('.feedback');
+      const correct = block.getAttribute('data-answer');
+      options.forEach(function(option) {
+        option.addEventListener('click', function() {
+          options.forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          if (option.getAttribute('data-option') === correct) {
+            feedback.textContent = '✅ Correct!';
+            feedback.className = 'feedback correct';
+          } else {
+            feedback.textContent = '❌ Incorrect. Try again!';
+            feedback.className = 'feedback incorrect';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
