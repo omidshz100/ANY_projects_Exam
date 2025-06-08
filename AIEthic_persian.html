@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ethics Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #f9fafb; /* Tailwind gray-50 */
+            border-radius: 0.75rem; /* Tailwind rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* Tailwind gray-300 */
+            border-radius: 0.5rem; /* Tailwind rounded-lg */
+            text-align: right; /* Default for Farsi */
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .option-btn:hover {
+            background-color: #e5e7eb; /* Tailwind gray-200 */
+        }
+        .option-btn.selected {
+            border-color: #3b82f6; /* Tailwind blue-500 */
+            background-color: #dbeafe; /* Tailwind blue-100 */
+        }
+        .option-btn.correct {
+            background-color: #d1fae5; /* Tailwind green-100 */
+            border-color: #10b981; /* Tailwind green-500 */
+        }
+        .option-btn.incorrect {
+            background-color: #fee2e2; /* Tailwind red-100 */
+            border-color: #ef4444; /* Tailwind red-500 */
+        }
+        .farsi-text {
+            direction: rtl;
+            text-align: right;
+        }
+        .english-text {
+            direction: ltr;
+            text-align: left;
+        }
+        .option-btn.english-text {
+            text-align: left;
+        }
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .feedback.correct {
+            background-color: #d1fae5; /* Tailwind green-100 */
+            color: #065f46; /* Tailwind green-700 */
+        }
+        .feedback.incorrect {
+            background-color: #fee2e2; /* Tailwind red-100 */
+            color: #991b1b; /* Tailwind red-700 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="quiz-container">
+        <h1 id="quiz-title" class="text-3xl font-bold text-center mb-6 text-gray-800">آزمون اخلاق هوش مصنوعی (فارسی)</h1>
+        
+        <div id="question-area">
+            <p id="question-number" class="text-sm text-gray-500 mb-2"></p>
+            <h2 id="question-text" class="text-xl font-semibold mb-4 text-gray-700"></h2>
+            <div id="options-container" class="space-y-3">
+                </div>
+        </div>
+
+        <div id="feedback-area" class="feedback mt-4 hidden"></div>
+
+        <button id="next-btn" class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50" disabled>
+            سوال بعدی
+        </button>
+
+        <div id="results-area" class="hidden mt-8 text-center">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">نتایج آزمون</h2>
+            <p id="score-text" class="text-xl text-gray-700"></p>
+            <p id="completion-message" class="text-lg text-gray-600 mt-2"></p>
+            <button id="restart-btn" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out">
+                شروع مجدد آزمون
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // --- Farsi Questions ---
+            {
+                language: 'fa',
+                question: "بر اساس فصل اول کتاب، \"قدرت شکافنده\" (cleaving power) دیجیتال به چه معناست؟",
+                options: [
+                    "توانایی دیجیتال در افزایش سرعت محاسبات و پردازش داده‌ها به صورت نمایی.",
+                    "قدرت دیجیتال در ایجاد تمایز و جدایی بین نسل‌های مختلف کاربران فناوری.",
+                    "توانایی دیجیتال در جفت کردن، جدا کردن یا بازجفت کردن ویژگی‌های جهان (هستی‌شناسی) و مفروضات ما درباره آن‌ها (معرفت‌شناسی) که پیشتر غیرقابل تغییر پنداشته می‌شدند.",
+                    "ناتوانی ذاتی فناوری‌های دیجیتال در یکپارچه‌سازی با سیستم‌های سنتی و آنالوگ."
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa',
+                question: "نویسنده در فصل اول، ظهور هوش مصنوعی (AI) را عمدتاً نتیجه کدام فرآیند می‌داند؟",
+                options: [
+                    "ترکیب عاملیت (agency) و هوشمندی (intelligence) در ساخته‌های جدید فناورانه.",
+                    "پیشرفت صرف در قدرت سخت‌افزاری کامپیوترها و الگوریتم‌های پیچیده‌تر.",
+                    "جدا شدن (decoupling) توانایی حل موفقیت‌آمیز یک مسئله یا تکمیل یک وظیفه از نیاز به هوشمند بودن برای انجام آن.",
+                    "تلاش برای ساخت ماشین‌هایی که دقیقاً مانند مغز انسان فکر و عمل می‌کنند."
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa',
+                question: "طبق فصل دوم، نویسنده در مورد تعریف هوش مصنوعی (AI) چه دیدگاهی دارد؟",
+                options: [
+                    "هوش مصنوعی یک اصطلاح علمی با تعریف دقیق و مورد توافق جهانی است.",
+                    "فقدان تعریف واحد برای هوش مصنوعی، بحث در مورد اخلاق آن را غیرممکن می‌سازد.",
+                    "هوش مصنوعی یک اصطلاح عمومی است که به خانواده‌ای از علوم، روش‌ها و محصولات اشاره دارد و اغلب با اصل \"وقتی ببینمش، می‌شناسمش\" قابل درک است.",
+                    "تعریف هوش مصنوعی صرفاً بر توانایی ماشین‌ها در \"فکر کردن\" متمرکز است."
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa',
+                question: "نویسنده در فصل دوم، کدام یک از \"دو روح هوش مصنوعی\" (two souls of AI) را بسیار موفق و کدام یک را ناموفق می‌داند؟",
+                options: [
+                    "رویکرد شناختی (تولید هوشمندی) بسیار موفق بوده، در حالی که رویکرد مهندسی (تکثیر رفتار هوشمند) شکست خورده است.",
+                    "رویکرد مهندسی (تکثیر رفتار هوشمند) بسیار موفق بوده، در حالی که رویکرد شناختی (تولید هوشمندی) عمدتاً ناموفق بوده و در حد داستان‌های علمی-تخیلی باقی مانده است.",
+                    "هر دو رویکرد شناختی و مهندسی به یک اندازه در دستیابی به اهداف خود موفق بوده‌اند.",
+                    "هر دو رویکرد با چالش‌های مشابهی روبرو هستند و هیچ‌کدام موفقیت چشمگیری نداشته‌اند."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa',
+                question: "بر اساس فصل سوم، نویسنده پیش‌بینی می‌کند که هوش مصنوعی در آینده به کدام سمت حرکت خواهد کرد از نظر نوع داده‌های مورد استفاده؟",
+                options: [
+                    "تمرکز انحصاری بر \"داده‌های تاریخی\" (historical data) به دلیل دقت بالای آن‌ها.",
+                    "حرکت به سمت استفاده هرچه بیشتر از \"داده‌های ترکیبی\" (hybrid data) و به‌ویژه \"داده‌های مصنوعی\" (synthetic data).",
+                    "اولویت دادن به \"داده‌های حجیم\" (Big Data) بدون در نظر گرفتن کیفیت آن‌ها.",
+                    "استفاده از داده‌هایی که کاملاً توسط انسان و به صورت دستی برچسب‌گذاری شده‌اند."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa',
+                question: "نویسنده در فصل سوم چه استراتژی‌ای را برای موفقیت آینده هوش مصنوعی در حل مسائل مطرح می‌کند؟",
+                options: [
+                    "تلاش برای ساخت هوش مصنوعی که بتواند مسائل \"دشوار\" (نیازمند مهارت انسانی) را دقیقاً مانند انسان حل کند.",
+                    "تبدیل مسائل \"دشوار\" (difficult) به مسائل \"پیچیده\" (complex) از طریق فرآیند \"پوشش‌دهی\" (enveloping) محیط، تا هوش مصنوعی بتواند با آن‌ها بهتر مقابله کند.",
+                    "محدود کردن کاربرد هوش مصنوعی تنها به مسائلی که از ابتدا \"ساده\" و \"کم‌پیچیدگی\" هستند.",
+                    "افزایش هوشمندی سیستم‌های هوش مصنوعی تا حدی که بتوانند هر نوع مسئله‌ای را بدون تغییر در محیط حل کنند."
+                ],
+                correctAnswerIndex: 1
+            },
+            // --- English Questions ---
+            {
+                language: 'en',
+                question: "According to Chapter 1 of the book, what is meant by the \"cleaving power\" of the digital?",
+                options: [
+                    "The ability of the digital to exponentially increase the speed of computations and data processing.",
+                    "The power of the digital to create a distinction and separation between different generations of technology users.",
+                    "The ability of the digital to couple, decouple, or recouple features of the world (ontology) and our corresponding assumptions about them (epistemology) that we previously thought were unchangeable.",
+                    "The inherent inability of digital technologies to integrate with traditional and analog systems."
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en',
+                question: "In Chapter 1, the author considers the emergence of Artificial Intelligence (AI) primarily as a result of which process?",
+                options: [
+                    "The coupling of agency and intelligence in new technological artifacts.",
+                    "Sheer advancement in computer hardware power and more complex algorithms.",
+                    "The decoupling of the ability to successfully solve a problem or complete a task from the need to be intelligent to do so.",
+                    "The effort to build machines that think and act exactly like the human brain."
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en',
+                question: "According to Chapter 2, what is the author's view regarding the definition of Artificial Intelligence (AI)?",
+                options: [
+                    "AI is a scientific term with a precise and universally agreed-upon definition.",
+                    "The lack of a single definition for AI makes discussing its ethics impossible.",
+                    "AI is a generic expression referring to a family of sciences, methods, and products, often understandable by the \"I know it when I see it\" principle.",
+                    "The definition of AI solely focuses on the ability of machines to \"think.\""
+                ],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en',
+                question: "In Chapter 2, which of the \"two souls of AI\" does the author consider very successful and which unsuccessful?",
+                options: [
+                    "The cognitive approach (intelligence production) has been very successful, while the engineering approach (intelligent behavior reproduction) has failed.",
+                    "The engineering approach (intelligent behavior reproduction) has been astoundingly successful, while the cognitive approach (intelligence production) has been largely unsuccessful and remains science fiction.",
+                    "Both cognitive and engineering approaches have been equally successful in achieving their goals.",
+                    "Both approaches face similar challenges and neither has achieved significant success."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en',
+                question: "According to Chapter 3, the author predicts that AI in the future will move in which direction regarding the type of data used?",
+                options: [
+                    "Exclusive focus on \"historical data\" due to their high accuracy.",
+                    "Movement towards increasing use of \"hybrid data\" and especially \"synthetic data.\"",
+                    "Prioritizing \"Big Data\" without considering their quality.",
+                    "Using data that are entirely manually labeled by humans."
+                ],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en',
+                question: "In Chapter 3, what strategy does the author propose for the future success of AI in problem-solving?",
+                options: [
+                    "Attempting to build AI that can solve \"difficult\" problems (requiring human skill) exactly like humans.",
+                    "Translating \"difficult\" problems into \"complex\" problems through the process of \"enveloping\" the environment, so AI can better tackle them.",
+                    "Limiting the application of AI only to problems that are initially \"simple\" and \"low-complexity.\"",
+                    "Increasing the intelligence of AI systems to the point where they can solve any type of problem without environmental changes."
+                ],
+                correctAnswerIndex: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answerSelected = false;
+        let currentLanguageSection = 'fa'; // 'fa' or 'en'
+
+        const quizTitleEl = document.getElementById('quiz-title');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainerEl = document.getElementById('options-container');
+        const feedbackAreaEl = document.getElementById('feedback-area');
+        const nextBtnEl = document.getElementById('next-btn');
+        const resultsAreaEl = document.getElementById('results-area');
+        const scoreTextEl = document.getElementById('score-text');
+        const completionMessageEl = document.getElementById('completion-message');
+        const restartBtnEl = document.getElementById('restart-btn');
+        const questionAreaEl = document.getElementById('question-area');
+
+        function loadQuestion() {
+            answerSelected = false;
+            feedbackAreaEl.classList.add('hidden');
+            nextBtnEl.disabled = true;
+            optionsContainerEl.innerHTML = ''; // Clear previous options
+
+            const currentQuestion = quizData[currentQuestionIndex];
+            
+            // Set text direction and alignment based on language
+            if (currentQuestion.language === 'fa') {
+                questionTextEl.classList.add('farsi-text');
+                questionTextEl.classList.remove('english-text');
+            } else {
+                questionTextEl.classList.add('english-text');
+                questionTextEl.classList.remove('farsi-text');
+            }
+            
+            questionNumberEl.textContent = `سوال ${currentQuestionIndex + 1} از ${quizData.length}`;
+             if (currentQuestion.language === 'en') {
+                 questionNumberEl.textContent = `Question ${currentQuestionIndex - 5} of ${quizData.length / 2}`;
+                 if (currentQuestionIndex === 6) quizTitleEl.textContent = "AI Ethics Quiz (English)";
+             }
+
+
+            questionTextEl.textContent = currentQuestion.question;
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option-btn');
+                 if (currentQuestion.language === 'en') {
+                    button.classList.add('english-text');
+                } else {
+                    button.classList.add('farsi-text');
+                }
+                button.textContent = option;
+                button.addEventListener('click', () => selectAnswer(index, button));
+                optionsContainerEl.appendChild(button);
+            });
+        }
+
+        function selectAnswer(selectedIndex, buttonEl) {
+            if (answerSelected) return;
+            answerSelected = true;
+
+            const currentQuestion = quizData[currentQuestionIndex];
+            const correct = selectedIndex === currentQuestion.correctAnswerIndex;
+
+            if (correct) {
+                score++;
+                buttonEl.classList.add('correct');
+                feedbackAreaEl.textContent = currentQuestion.language === 'fa' ? 'صحیح!' : 'Correct!';
+                feedbackAreaEl.className = 'feedback correct'; // Clears other feedback classes
+            } else {
+                buttonEl.classList.add('incorrect');
+                feedbackAreaEl.textContent = currentQuestion.language === 'fa' ? 
+                    `اشتباه! پاسخ صحیح: ${currentQuestion.options[currentQuestion.correctAnswerIndex]}` :
+                    `Incorrect! Correct answer: ${currentQuestion.options[currentQuestion.correctAnswerIndex]}`;
+                feedbackAreaEl.className = 'feedback incorrect'; // Clears other feedback classes
+                // Highlight the correct answer
+                optionsContainerEl.children[currentQuestion.correctAnswerIndex].classList.add('correct');
+            }
+            
+            feedbackAreaEl.classList.remove('hidden');
+            nextBtnEl.disabled = false;
+
+            // Disable all option buttons
+            Array.from(optionsContainerEl.children).forEach(btn => btn.disabled = true);
+        }
+
+        nextBtnEl.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                if (currentQuestionIndex === 6 && currentLanguageSection === 'fa') { // Switched to English section
+                    currentLanguageSection = 'en';
+                    quizTitleEl.textContent = "AI Ethics Quiz (English)";
+                    nextBtnEl.textContent = "Next Question";
+                    restartBtnEl.textContent = "Restart Quiz";
+                }
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        restartBtnEl.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            currentLanguageSection = 'fa';
+            quizTitleEl.textContent = "آزمون اخلاق هوش مصنوعی (فارسی)";
+            nextBtnEl.textContent = "سوال بعدی";
+            resultsAreaEl.classList.add('hidden');
+            questionAreaEl.classList.remove('hidden');
+            nextBtnEl.classList.remove('hidden');
+            loadQuestion();
+        });
+
+        function showResults() {
+            questionAreaEl.classList.add('hidden');
+            feedbackAreaEl.classList.add('hidden');
+            nextBtnEl.classList.add('hidden');
+            resultsAreaEl.classList.remove('hidden');
+
+            scoreTextEl.textContent = `امتیاز شما: ${score} از ${quizData.length}`;
+            if (currentQuestionIndex >= quizData.length && currentLanguageSection === 'en') {
+                completionMessageEl.textContent = "شما هر دو بخش فارسی و انگلیسی آزمون را تکمیل کردید!";
+            }
+        }
+
+        // Start the quiz
+        loadQuestion();
+    </script>
+
+</body>
+</html>
+

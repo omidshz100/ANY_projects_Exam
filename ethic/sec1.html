@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ethics Quiz (Chapter 1 Expanded - 25 Qs)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; 
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #f9fafb; 
+            border-radius: 0.75rem; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; 
+            border-radius: 0.5rem; 
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .option-btn:hover {
+            background-color: #e5e7eb; 
+        }
+        .option-btn.selected {
+            border-color: #3b82f6; 
+            background-color: #dbeafe; 
+        }
+        .option-btn.correct {
+            background-color: #d1fae5; 
+            border-color: #10b981; 
+        }
+        .option-btn.incorrect {
+            background-color: #fee2e2; 
+            border-color: #ef4444; 
+        }
+        .farsi-text {
+            direction: rtl;
+            text-align: right;
+        }
+        .english-text {
+            direction: ltr;
+            text-align: left;
+        }
+        .option-btn.english-text {
+            text-align: left;
+        }
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .feedback.correct {
+            background-color: #d1fae5; 
+            color: #065f46; 
+        }
+        .feedback.incorrect {
+            background-color: #fee2e2; 
+            color: #991b1b; 
+        }
+        .language-switch-btns {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border: 1px solid #6b7280; 
+            border-radius: 0.375rem; 
+            cursor: pointer;
+            background-color: #fff;
+            color: #374151; 
+        }
+        .lang-btn.active {
+            background-color: #3b82f6; 
+            color: #fff; 
+            border-color: #3b82f6; 
+        }
+        .chapter-info {
+            font-size: 0.875rem; /* text-sm */
+            color: #6b7280; /* text-gray-500 */
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="quiz-container">
+        <div class="language-switch-btns">
+            <button id="lang-fa-btn" class="lang-btn active">فارسی</button>
+            <button id="lang-en-btn" class="lang-btn">English</button>
+        </div>
+
+        <h1 id="quiz-title" class="text-3xl font-bold text-center mb-6 text-gray-800">آزمون اخلاق هوش مصنوعی</h1>
+        
+        <div id="question-area">
+            <p id="question-number" class="text-sm text-gray-500 mb-2"></p>
+            <p id="chapter-info-text" class="chapter-info"></p>
+            <h2 id="question-text" class="text-xl font-semibold mb-4 text-gray-700"></h2>
+            <div id="options-container" class="space-y-3">
+                </div>
+        </div>
+
+        <div id="feedback-area" class="feedback mt-4 hidden"></div>
+
+        <button id="next-btn" class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50">
+            سوال بعدی
+        </button>
+
+        <div id="results-area" class="hidden mt-8 text-center">
+            <h2 id="results-title" class="text-2xl font-bold mb-4 text-gray-800">نتایج آزمون</h2>
+            <p id="score-text" class="text-xl text-gray-700"></p>
+            <p id="completion-message" class="text-lg text-gray-600 mt-2"></p>
+            <button id="restart-btn" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out">
+                شروع مجدد آزمون
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            // --- Chapter 1 Farsi (25 questions) ---
+            {
+                language: 'fa', chapter: 1,
+                question: "بر اساس فصل اول کتاب، \"قدرت شکافنده\" (cleaving power) دیجیتال به چه معناست؟",
+                options: ["توانایی دیجیتال در افزایش سرعت محاسبات و پردازش داده‌ها به صورت نمایی.", "قدرت دیجیتال در ایجاد تمایز و جدایی بین نسل‌های مختلف کاربران فناوری.", "توانایی دیجیتال در جفت کردن، جدا کردن یا بازجفت کردن ویژگی‌های جهان (هستی‌شناسی) و مفروضات ما درباره آن‌ها (معرفت‌شناسی) که پیشتر غیرقابل تغییر پنداشته می‌شدند.", "ناتوانی ذاتی فناوری‌های دیجیتال در یکپارچه‌سازی با سیستم‌های سنتی و آنالوگ."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "نویسنده در فصل اول، ظهور هوش مصنوعی (AI) را عمدتاً نتیجه کدام فرآیند می‌داند؟",
+                options: ["ترکیب عاملیت (agency) و هوشمندی (intelligence) در ساخته‌های جدید فناورانه.", "پیشرفت صرف در قدرت سخت‌افزاری کامپیوترها و الگوریتم‌های پیچیده‌تر.", "جدا شدن (decoupling) توانایی حل موفقیت‌آمیز یک مسئله یا تکمیل یک وظیفه از نیاز به هوشمند بودن برای انجام آن.", "تلاش برای ساخت ماشین‌هایی که دقیقاً مانند مغز انسان فکر و عمل می‌کنند."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام عبارت به بهترین شکل مفهوم \"باز-هستی‌شناسی کردن\" (re-ontologizing) جهان توسط فناوری‌های دیجیتال را توصیف می‌کند؟",
+                options: ["ایجاد مدل‌های دقیق‌تر از جهان فیزیکی با استفاده از سنسورهای دیجیتال.", "تغییر درک ما از چیستی و ساختار واقعیت به واسطه تعامل با محیط‌های دیجیتال و داده‌ها.", "ترجمه تمام اشیاء و فرآیندهای آنالوگ به معادل‌های دیجیتال آن‌ها.", "افزایش وابستگی ما به دستگاه‌های دیجیتال برای انجام کارهای روزمره."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "نویسنده فناوری‌های دیجیتال را به عنوان فناوری‌های \"مرتبه سوم\" (third-order technologies) توصیف می‌کند، به این معنی که:",
+                options: ["این فناوری‌ها پس از دو انقلاب بزرگ فناورانه قبلی (کشاورزی و صنعتی) ظهور کرده‌اند.", "این فناوری‌ها نه تنها کارهایی که انجام می‌دهیم را تغییر می‌دهند، بلکه درک ما از خودمان و جهان را نیز دگرگون می‌کنند.", "این فناوری‌ها عمدتاً برای کاربردهای نظامی و دولتی (مرتبه سوم اهمیت) توسعه یافته‌اند.", "این فناوری‌ها به سه جزء اصلی سخت‌افزار، نرم‌افزار و شبکه تقسیم می‌شوند."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "نقش \"اینفوسفر\" (infosphere) در زمینه ظهور هوش مصنوعی طبق فصل اول چیست؟",
+                options: ["اینفوسفر صرفاً به معنای اینترنت و وب جهانی است.", "اینفوسفر یک فضای مجازی برای بازی و سرگرمی است که تأثیر کمی بر هوش مصنوعی دارد.", "اینفوسفر محیطی متشکل از اطلاعات و داده‌هاست که هوش مصنوعی در آن شکل گرفته، توسعه می‌یابد و عمل می‌کند.", "اینفوسفر لایه‌ای امنیتی برای محافظت از داده‌های حساس در سیستم‌های هوش مصنوعی است."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام فعالیت به عنوان \"فعالیت نوآورانه تعیین‌کننده عصر ما\" (the defining innovative activity of our age) در فصل اول معرفی شده است؟",
+                options: ["مهندسی ژنتیک", "اکتشافات فضایی", "طراحی (Design)", "تولید انبوه صنعتی"],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "مفهوم \"جدایی بزرگ\" (great decoupling) که به ظهور هوش مصنوعی کمک کرده، به جدایی کدام دو مورد اشاره دارد؟",
+                options: ["جدایی بین انسان و ماشین.", "جدایی بین داده‌ها و اطلاعات.", "جدایی بین عاملیت هوشمند و نیاز به هوشمندی بیولوژیکی یا انسانی برای انجام وظایف.", "جدایی بین دنیای فیزیکی و دنیای مجازی."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "چرا نویسنده بر اهمیت \"طراحی\" در عصر دیجیتال و هوش مصنوعی تأکید می‌کند؟",
+                options: ["زیرا طراحی زیبا محصولات دیجیتال را جذاب‌تر می‌کند.", "زیرا طراحی خوب می‌تواند به حل مشکلات پیچیده و شکل دادن به تعاملات ما با فناوری و یکدیگر کمک کند.", "زیرا طراحان در شرکت‌های فناوری درآمد بالایی دارند.", "زیرا طراحی فقط به جنبه‌های بصری محصولات محدود می‌شود."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "فناوری‌های دیجیتال چگونه به فرآیند \"باز-معرفت‌شناسی کردن\" (re-epistemologizing) کمک می‌کنند؟",
+                options: ["با محدود کردن دسترسی به اطلاعات و دانش.", "با تغییر نحوه کسب، پردازش، اشتراک‌گذاری و ارزیابی دانش و اطلاعات.", "با تأیید تمام اطلاعات موجود در اینترنت به عنوان دانش معتبر.", "با جایگزین کردن کامل روش‌های سنتی یادگیری با آموزش آنلاین."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام گزینه بیانگر یکی از پیامدهای اصلی \"قدرت شکافنده\" (cleaving power) فناوری‌های دیجیتال است؟",
+                options: ["تقویت ساختارهای اجتماعی و اقتصادی موجود بدون تغییر آن‌ها.", "ایجاد امکان بازتعریف و بازپیکربندی مفاهیمی که قبلاً ثابت پنداشته می‌شدند، مانند کار، آموزش یا حتی دوستی.", "کاهش پیچیدگی در تصمیم‌گیری‌های روزمره.", "افزایش امنیت و حریم خصوصی به طور خودکار."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام یک از موارد زیر نمونه‌ای از \"جفت‌کردن\" (coupling) توسط قدرت شکافنده دیجیتال است؟",
+                options: ["جدا کردن هویت آنلاین از هویت آفلاین.", "اتصال دستگاه‌های مختلف به اینترنت اشیاء برای ایجاد خانه‌های هوشمند.", "حذف نیاز به حضور فیزیکی برای شرکت در یک جلسه.", "افزایش شکاف دیجیتالی بین مناطق مختلف."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "مفهوم \"محیط‌های پوشاننده\" (enveloping environments) که توسط فناوری‌های دیجیتال ایجاد می‌شوند، به چه معناست؟",
+                options: ["محیط‌هایی که کاملاً از دنیای واقعی جدا هستند.", "محیط‌هایی که به طور فزاینده‌ای با فناوری‌های دیجیتال و داده‌ها آمیخته شده و بر رفتار ما تأثیر می‌گذارند.", "محیط‌های طبیعی که توسط انسان‌ها برای محافظت از آن‌ها پوشانده شده‌اند.", "محیط‌های مجازی که صرفاً برای سرگرمی استفاده می‌شوند."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "چرا درک هوش مصنوعی به عنوان یک \"طلاق موفقیت‌آمیز بین عاملیت و هوشمندی\" اهمیت دارد؟",
+                options: ["زیرا نشان می‌دهد هوش مصنوعی هرگز نمی‌تواند به سطح هوش انسانی برسد.", "زیرا تأکید می‌کند که سیستم‌های هوش مصنوعی می‌توانند وظایف را بدون نیاز به درک واقعی یا آگاهی انجام دهند.", "زیرا به این معناست که هوش مصنوعی به زودی از کنترل انسان خارج خواهد شد.", "زیرا ثابت می‌کند که هوش مصنوعی همیشه به نفع بشریت عمل خواهد کرد."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام عامل به عنوان \"روان‌کننده\" (lubricant) اصلی برای رشد سریع اینفوسفر و در نتیجه هوش مصنوعی عمل کرده است؟",
+                options: ["افزایش قوانین و مقررات دولتی.", "کاهش هزینه‌های سخت‌افزار و افزایش قدرت محاسباتی.", "مقاومت عمومی در برابر پذیرش فناوری‌های جدید.", "محدودیت در دسترسی به اینترنت پرسرعت."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "تأکید نویسنده بر \"اینفوسفر\" به عنوان بستر ظهور هوش مصنوعی، کدام جنبه از هوش مصنوعی را برجسته می‌کند؟",
+                options: ["وابستگی هوش مصنوعی به الگوریتم‌های ریاضی پیچیده.", "نقش داده‌ها و اطلاعات به عنوان عنصر حیاتی برای عملکرد و توسعه هوش مصنوعی.", "اهمیت سخت‌افزارهای قدرتمند برای اجرای سیستم‌های هوش مصنوعی.", "نیاز به هوش انسانی برای طراحی و نظارت بر هوش مصنوعی."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام ویژگی فناوری‌های دیجیتال امکان \"بازپیکربندی\" (reconfiguration) سریع واقعیت‌ها و فرآیندها را فراهم می‌کند؟",
+                options: ["هزینه بالای آن‌ها.", "ماهیت فیزیکی و غیرقابل تغییر آن‌ها.", "نرم‌افزاری بودن و قابلیت برنامه‌ریزی مجدد آن‌ها.", "وابستگی آن‌ها به منابع انرژی تجدیدناپذیر."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "مفهوم \"آنتی‌کپی‌رایت\" (anticopyright) که در فصل به آن اشاره شده، به چه معناست؟",
+                options: ["مخالفت با هرگونه قانون کپی‌رایت برای نرم‌افزار.", "فرهنگی که در آن اطلاعات تمایل به کپی شدن و اشتراک‌گذاری آزادانه دارد، برخلاف کنترل شدید بر کپی.", "حمایت از شرکت‌های بزرگ برای نقض کپی‌رایت.", "استفاده غیرقانونی از نرم‌افزارهای دارای کپی‌رایت."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام تحول، \"سومین جهش بزرگ در خودفهمی انسان\" را رقم زد که زمینه را برای پذیرش هوش مصنوعی فراهم کرد؟",
+                options: ["انقلاب کپرنیکی (جایگاه زمین در کیهان).", "انقلاب داروینی (جایگاه انسان در طبیعت).", "انقلاب فرویدی (نقش ناخودآگاه).", "انقلاب تورینگی (ماشین‌ها می‌توانند هوشمندانه عمل کنند)."],
+                correctAnswerIndex: 3 // Assuming Turing based on context of AI emergence
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "چرا مفهوم \"واقعیت پلاستیکی\" (plastic reality) برای درک تأثیر فناوری‌های دیجیتال مهم است؟",
+                options: ["زیرا نشان می‌دهد واقعیت مجازی هرگز نمی‌تواند به اندازه دنیای فیزیکی واقعی باشد.", "زیرا تأکید می‌کند که مرزهای بین واقعیت و مجاز، و همچنین قابلیت تغییر و شکل‌دهی واقعیت توسط فناوری‌های دیجیتال، افزایش یافته است.", "زیرا به استفاده از پلاستیک در ساخت دستگاه‌های دیجیتال اشاره دارد.", "زیرا بیانگر شکنندگی سیستم‌های دیجیتال است."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "نویسنده معتقد است که دیجیتال شدن چگونه بر \"واسطه‌ها\" (intermediaries) تأثیر گذاشته است؟",
+                options: ["نقش واسطه‌ها را در تمام زمینه‌ها تقویت کرده است.", "بسیاری از واسطه‌های سنتی را حذف یا دگرگون کرده (disintermediation/re-intermediation) و واسطه‌های جدیدی ایجاد کرده است.", "هیچ تأثیر قابل توجهی بر واسطه‌ها نداشته است.", "فقط واسطه‌های مالی را تحت تأثیر قرار داده است."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام گزینه به بهترین شکل دیدگاه فصل اول در مورد رابطه بین \"داده\"، \"اطلاعات\" و \"دانش\" را در عصر دیجیتال توصیف می‌کند؟",
+                options: ["این سه مفهوم کاملاً از هم جدا و بدون ارتباط هستند.", "فناوری دیجیتال باعث شده تا تمایز بین این سه مفهوم از بین برود.", "حجم عظیم داده‌های دیجیتال چالش‌هایی برای تبدیل آن‌ها به اطلاعات مفید و سپس دانش قابل اعتماد ایجاد کرده است.", "دانش در عصر دیجیتال دیگر ارزشی ندارد و فقط داده‌های خام مهم هستند."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "مفهوم \"هستی‌شناسی‌های سبک‌وزن\" (lightweight ontologies) که در زمینه وب معنایی مطرح شد، به چه چیزی اشاره دارد؟",
+                options: ["هستی‌شناسی‌هایی که حجم کمی دارند و به سرعت بارگذاری می‌شوند.", "روش‌های ساده‌تر و انعطاف‌پذیرتر برای سازماندهی و معنا بخشیدن به اطلاعات آنلاین، در مقایسه با هستی‌شناسی‌های سنگین و پیچیده فلسفی.", "هستی‌شناسی‌هایی که فقط برای موضوعات غیرجدی و سرگرمی کاربرد دارند.", "مخالفت با هرگونه ساختار یا سازماندهی اطلاعات در وب."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "کدام یک از موارد زیر مثالی از \"باز-میانجی‌گری\" (re-intermediation) در عصر دیجیتال است؟",
+                options: ["حذف کامل نیاز به آژانس‌های مسافرتی با ظهور وب‌سایت‌های رزرو آنلاین.", "ایجاد پلتفرم‌های جدید مانند Airbnb یا Uber که نقش واسطه‌های جدیدی را بین ارائه‌دهندگان خدمات و مشتریان ایفا می‌کنند.", "افزایش تعداد شعب بانک‌های فیزیکی.", "کاهش استفاده از موتورهای جستجو."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "چرا نویسنده استدلال می‌کند که هوش مصنوعی یک \"فناوری مفهومی\" (conceptual technology) نیز هست؟",
+                options: ["زیرا فقط در حد مفهوم باقی مانده و کاربرد عملی ندارد.", "زیرا برای درک و توسعه آن نیاز به مفاهیم پیچیده فلسفی و ریاضی است.", "زیرا هوش مصنوعی نه تنها ابزارها، بلکه درک ما از مفاهیم اساسی مانند هوش، عاملیت، و حتی خودمان را تغییر می‌دهد.", "زیرا فقط توسط روشنفکران و دانشگاهیان قابل فهم است."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 1,
+                question: "مهم‌ترین تأثیر \"دیجیتالی شدن\" (digitization) بر اطلاعات طبق فصل اول چیست؟",
+                options: ["کاهش حجم کل اطلاعات موجود در جهان.", "افزایش شدید در تولید، ذخیره‌سازی، پردازش و دسترسی به اطلاعات.", "بهبود خودکار کیفیت و صحت تمام اطلاعات دیجیتالی شده.", "محدود کردن دسترسی به اطلاعات فقط برای متخصصان."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapter 2 Farsi (Existing 2 questions) ---
+             {
+                language: 'fa', chapter: 2,
+                question: "طبق فصل دوم، نویسنده در مورد تعریف هوش مصنوعی (AI) چه دیدگاهی دارد؟",
+                options: ["هوش مصنوعی یک اصطلاح علمی با تعریف دقیق و مورد توافق جهانی است.", "فقدان تعریف واحد برای هوش مصنوعی، بحث در مورد اخلاق آن را غیرممکن می‌سازد.", "هوش مصنوعی یک اصطلاح عمومی است که به خانواده‌ای از علوم، روش‌ها و محصولات اشاره دارد و اغلب با اصل \"وقتی ببینمش، می‌شناسمش\" قابل درک است.", "تعریف هوش مصنوعی صرفاً بر توانایی ماشین‌ها در \"فکر کردن\" متمرکز است."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'fa', chapter: 2,
+                question: "نویسنده در فصل دوم، کدام یک از \"دو روح هوش مصنوعی\" (two souls of AI) را بسیار موفق و کدام یک را ناموفق می‌داند؟",
+                options: ["رویکرد شناختی (تولید هوشمندی) بسیار موفق بوده، در حالی که رویکرد مهندسی (تکثیر رفتار هوشمند) شکست خورده است.", "رویکرد مهندسی (تکثیر رفتار هوشمند) بسیار موفق بوده، در حالی که رویکرد شناختی (تولید هوشمندی) عمدتاً ناموفق بوده و در حد داستان‌های علمی-تخیلی باقی مانده است.", "هر دو رویکرد شناختی و مهندسی به یک اندازه در دستیابی به اهداف خود موفق بوده‌اند.", "هر دو رویکرد با چالش‌های مشابهی روبرو هستند و هیچ‌کدام موفقیت چشمگیری نداشته‌اند."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapter 3 Farsi (Existing 2 questions) ---
+            {
+                language: 'fa', chapter: 3,
+                question: "بر اساس فصل سوم، نویسنده پیش‌بینی می‌کند که هوش مصنوعی در آینده به کدام سمت حرکت خواهد کرد از نظر نوع داده‌های مورد استفاده؟",
+                options: ["تمرکز انحصاری بر \"داده‌های تاریخی\" (historical data) به دلیل دقت بالای آن‌ها.", "حرکت به سمت استفاده هرچه بیشتر از \"داده‌های ترکیبی\" (hybrid data) و به‌ویژه \"داده‌های مصنوعی\" (synthetic data).", "اولویت دادن به \"داده‌های حجیم\" (Big Data) بدون در نظر گرفتن کیفیت آن‌ها.", "استفاده از داده‌هایی که کاملاً توسط انسان و به صورت دستی برچسب‌گذاری شده‌اند."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'fa', chapter: 3,
+                question: "نویسنده در فصل سوم چه استراتژی‌ای را برای موفقیت آینده هوش مصنوعی در حل مسائل مطرح می‌کند؟",
+                options: ["تلاش برای ساخت هوش مصنوعی که بتواند مسائل \"دشوار\" (نیازمند مهارت انسانی) را دقیقاً مانند انسان حل کند.", "تبدیل مسائل \"دشوار\" (difficult) به مسائل \"پیچیده\" (complex) از طریق فرآیند \"پوشش‌دهی\" (enveloping) محیط، تا هوش مصنوعی بتواند با آن‌ها بهتر مقابله کند.", "محدود کردن کاربرد هوش مصنوعی تنها به مسائلی که از ابتدا \"ساده\" و \"کم‌پیچیدگی\" هستند.", "افزایش هوشمندی سیستم‌های هوش مصنوعی تا حدی که بتوانند هر نوع مسئله‌ای را بدون تغییر در محیط حل کنند."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapters 4-13 Farsi (Existing 20 questions) ---
+            { language: 'fa', chapter: 4, question: "فصل چهارم کدام پنج اصل اخلاقی را به عنوان چارچوب یکپارچه برای هوش مصنوعی معرفی می‌کند؟", options: ["سودمندی، عدم آسیب‌رسانی، خودمختاری، عدالت، و شفافیت.", "سودمندی، عدم آسیب‌رسانی، خودمختاری، عدالت، و توضیح‌پذیری.", "نوآوری، کارایی، امنیت، حریم خصوصی، و مسئولیت‌پذیری.", "پیشرفت، دقت، سرعت، همکاری، و پایداری."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 4, question: "اصل \"توضیح‌پذیری\" (Explicability) در چارچوب اخلاقی هوش مصنوعی شامل کدام دو جنبه است؟", options: ["فقط جنبه فنی (چگونه کار می‌کند).", "فقط جنبه اخلاقی (چه کسی مسئول است).", "جنبه معرفت‌شناختی (قابل فهم بودن) و جنبه اخلاقی (پاسخگویی).", "جنبه قانونی (انطباق با مقررات) و جنبه اجتماعی (تأثیر بر جامعه)."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 5, question: "کدام یک از موارد زیر نمونه‌ای از \"اخلاق‌فروشی\" (Ethics Shopping) در زمینه هوش مصنوعی است؟", options: ["توسعه هوش مصنوعی با رعایت دقیق تمام اصول اخلاقی شناخته‌شده.", "انتخاب گزینشی اصول اخلاقی از میان پیشنهادات مختلف برای توجیه اقدامات فعلی یک سازمان.", "شفاف‌سازی کامل در مورد نحوه عملکرد الگوریتم‌های هوش مصنوعی.", "سرمایه‌گذاری در آموزش اخلاق به توسعه‌دهندگان هوش مصنوعی."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 5, question: "\"اخلاق‌آبی‌شویی\" (Ethics Bluewashing) به چه معناست؟", options: ["تلاش برای استفاده از هوش مصنوعی جهت بهبود کیفیت آب.", "ادعاهای بی‌اساس یا گمراه‌کننده در مورد ارزش‌ها و مزایای اخلاقی فناوری‌های دیجیتال برای بهتر نشان دادن خود.", "توسعه سیستم‌های هوش مصنوعی که کاملاً شفاف و قابل اعتماد هستند.", "حمایت مالی از تحقیقات اخلاقی در زمینه هوش مصنوعی."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 6, question: "تفاوت اصلی بین \"اخلاق سخت\" (Hard Ethics) و \"اخلاق نرم\" (Soft Ethics) در زمینه هوش مصنوعی چیست؟", options: ["اخلاق سخت به مسائل پیچیده‌تر و اخلاق نرم به مسائل ساده‌تر می‌پردازد.", "اخلاق سخت قبل از قانون‌گذاری و برای شکل دادن به آن به کار می‌رود، در حالی که اخلاق نرم پس از انطباق با قانون (پس از انطباق) اعمال می‌شود.", "اخلاق سخت فقط توسط متخصصان و اخلاق نرم توسط عموم مردم قابل درک است.", "اخلاق سخت بر مجازات و اخلاق نرم بر تشویق تمرکز دارد."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 6, question: "به گفته نویسنده، چرا انطباق با قانون (Compliance) برای هدایت جامعه به سمت درست، ضروری اما ناکافی است؟", options: ["زیرا قوانین اغلب ناقص هستند و نیاز به اصلاح دارند.", "زیرا انطباق با قانون، هزینه‌های زیادی برای سازمان‌ها ایجاد می‌کند.", "زیرا قانون فقط حرکات قانونی و غیرقانونی را مشخص می‌کند، اما در مورد بهترین حرکات برای داشتن جامعه بهتر سکوت می‌کند.", "زیرا اجرای قوانین همیشه با چالش‌های عملی مواجه است."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 7, question: "کدام یک از نگرانی‌های اخلاقی زیر که در فصل هفتم به آن اشاره شده، مربوط به \"شواهد غیرقابل بررسی\" (Inscrutable Evidence) است؟", options: ["احتمال اینکه الگوهای شناسایی شده توسط الگوریتم‌ها نتیجه ویژگی‌های ذاتی سیستم نباشند.", "عدم شفافیت در الگوریتم‌ها، زیرساخت‌های فنی-اجتماعی و تصمیماتی که پشتیبانی می‌کنند.", "استفاده از داده‌های گمراه‌کننده که منجر به سوگیری‌های ناخواسته می‌شود.", "نتایج ناعادلانه الگوریتم‌ها که منجر به تبعیض می‌شود."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 7, question: "چرا \"شفافیت\" (Transparency) به خودی خود یک اصل اخلاقی نیست، بلکه یک \"شرط پیشا-اخلاقی\" (pro-ethical condition) محسوب می‌شود؟", options: ["زیرا شفافیت همیشه منجر به نتایج بهتر نمی‌شود.", "زیرا شفافیت می‌تواند نوآوری را محدود کند.", "زیرا شفافیت وسیله‌ای برای دستیابی به اهداف اخلاقی است و گاهی اوقات عدم شفافیت می‌تواند مفیدتر باشد.", "زیرا دستیابی به شفافیت کامل در سیستم‌های پیچیده غیرممکن است."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 8, question: "منظور از \"ظهور\" (Emergence) به عنوان یکی از نگرانی‌های مربوط به جرایم هوش مصنوعی (AIC) چیست؟", options: ["ظهور ناگهانی فناوری‌های جدید هوش مصنوعی که قبلاً وجود نداشتند.", "اینکه یک عامل هوش مصنوعی ممکن است پس از استقرار، به روش‌های پیچیده‌تری فراتر از انتظار اولیه عمل کند.", "افزایش تعداد جرایمی که با استفاده از هوش مصنوعی انجام می‌شوند.", "ظهور قوانین جدید برای مقابله با جرایم هوش مصنوعی."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 8, question: "چرا \"مسئولیت‌پذیری\" (Liability) در جرایم هوش مصنوعی یک چالش محسوب می‌شود؟", options: ["زیرا هوش مصنوعی هنوز به اندازه کافی پیشرفته نیست تا مسئول اعمال خود باشد.", "زیرا قوانین فعلی فقط برای جرایم انسانی طراحی شده‌اند.", "زیرا تفکیک عمل مجرمانه از حالت ذهنی (قصد مجرمانه) در عامل هوش مصنوعی دشوار است و مدل‌های مسئولیت‌پذیری موجود ممکن است ناکافی باشند.", "زیرا شناسایی مجرم در جرایم سایبری بسیار پیچیده است."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 9, question: "بر اساس فصل نهم، تعریف \"هوش مصنوعی برای خیر اجتماعی\" (AI4SG) چیست؟", options: ["هرگونه استفاده از هوش مصنوعی که منجر به سودآوری برای شرکت‌ها شود.", "طراحی، توسعه و استقرار سیستم‌های هوش مصنوعی به گونه‌ای که از مشکلاتی که بر زندگی انسان یا رفاه جهان طبیعی تأثیر منفی می‌گذارند، جلوگیری کرده، آن‌ها را کاهش داده یا حل کند.", "استفاده از هوش مصنوعی صرفاً در پروژه‌های تحقیقاتی دانشگاهی.", "توسعه هوش مصنوعی بدون در نظر گرفتن تأثیرات اجتماعی آن."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 9, question: "کدام یک از هفت عامل ضروری برای موفقیت AI4SG، بر اهمیت \"آزمون‌پذیری و استقرار تدریجی\" تأکید دارد؟", options: ["حفاظت از حریم خصوصی و رضایت سوژه داده.", "توضیح قابل درک برای گیرنده و اهداف شفاف.", "آزمون‌پذیری و استقرار تدریجی (Falsifiability and Incremental Deployment).", "معنابخشی سازگار با انسان (Human-Friendly Semanticization)."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 10, question: "فصل دهم کدام چهار فرصت اصلی را که هوش مصنوعی برای جامعه ارائه می‌دهد، مشخص می‌کند؟", options: ["افزایش سودآوری، کاهش هزینه‌ها، بهبود کارایی، و گسترش بازار.", "خودشکوفایی انسان، عاملیت انسان، قابلیت‌های فردی و اجتماعی، و انسجام اجتماعی.", "اتوماسیون کامل، جایگزینی نیروی کار انسانی، کنترل متمرکز، و تصمیم‌گیری سریع.", "سرگرمی بیشتر، ارتباطات بهتر، دسترسی آسان‌تر به اطلاعات، و امنیت بالاتر."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 10, question: "یکی از توصیه‌های فصل دهم برای دستیابی به \"جامعه هوش مصنوعی خوب\" چیست؟", options: ["ممنوعیت کامل توسعه هوش مصنوعی به دلیل خطرات احتمالی.", "توسعه مکانیسم‌های حسابرسی برای سیستم‌های هوش مصنوعی جهت شناسایی پیامدهای ناخواسته مانند سوگیری ناعادلانه.", "واگذاری کامل تصمیم‌گیری‌های مهم به سیستم‌های هوش مصنوعی.", "نادیده گرفتن نگرانی‌های عمومی در مورد هوش مصنوعی برای تسریع نوآوری."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 11, question: "کدام دو فرصت اصلی را هوش مصنوعی در زمینه تغییرات اقلیمی ارائه می‌دهد؟", options: ["فقط فرصت‌های اقتصادی از طریق فروش فناوری‌های سبز.", "فرصت‌های معرفت‌شناختی (بهبود درک) و فرصت‌های اخلاقی (ارائه راه‌حل‌های سبزتر و مؤثرتر).", "فقط کاهش ردپای کربن خود هوش مصنوعی.", "افزایش مصرف انرژی برای محاسبات پیچیده اقلیمی."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 11, question: "چالش اصلی مرتبط با استفاده از هوش مصنوعی برای مقابله با تغییرات اقلیمی که کمتر به آن پرداخته شده چیست؟", options: ["عدم دقت مدل‌های پیش‌بینی اقلیمی مبتنی بر هوش مصنوعی.", "مقاومت صنایع در برابر پذیرش راه‌حل‌های مبتنی بر هوش مصنوعی.", "مشارکت هوش مصنوعی در تغییرات اقلیمی از طریق انتشار گازهای گلخانه‌ای ناشی از آموزش و محاسبات سنگین آن.", "کمبود داده‌های اقلیمی با کیفیت برای آموزش سیستم‌های هوش مصنوعی."], correctAnswerIndex: 2 },
+            { language: 'fa', chapter: 12, question: "چرا استفاده از \"اهداف توسعه پایدار سازمان ملل\" (UN SDGs) به عنوان معیاری برای ارزیابی AI4SG مفید است؟", options: ["زیرا SDGs تنها اهدافی هستند که هوش مصنوعی می‌تواند به آن‌ها کمک کند.", "زیرا SDGs چارچوبی بین‌المللی و مورد توافق برای اولویت‌های اقدام اجتماعی سودمند ارائه می‌دهند.", "زیرا SDGs فقط بر جنبه‌های زیست‌محیطی تمرکز دارند.", "زیرا SDGs توسط شرکت‌های بزرگ فناوری تدوین شده‌اند."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 12, question: "بر اساس نظرسنجی ارائه شده در فصل دوازدهم، کدام هدف توسعه پایدار (SDG) بیشترین تعداد پروژه‌های AI×SDG را به خود اختصاص داده است؟", options: ["هدف ۵: برابری جنسیتی.", "هدف ۳: سلامت و رفاه خوب.", "هدف ۱۶: صلح، عدالت و نهادهای قوی.", "هدف ۱۷: مشارکت برای اهداف."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 13, question: "ایده اصلی فصل پایانی کتاب، \"سبز و آبی\" (The Green and the Blue)، به چه چیزی اشاره دارد؟", options: ["اهمیت رنگ‌ها در طراحی رابط کاربری هوش مصنوعی.", "ترکیب و همکاری بین فناوری‌های دیجیتال (آبی) و تمام زیستگاه‌های ما (سبز) برای جامعه‌ای بهتر.", "جدایی کامل بین دنیای طبیعی و دنیای دیجیتال.", "استفاده از هوش مصنوعی برای ایجاد آثار هنری با تم سبز و آبی."], correctAnswerIndex: 1 },
+            { language: 'fa', chapter: 13, question: "نویسنده در فصل پایانی، نقش آینده انسان‌ها در عصر هوش مصنوعی را چگونه توصیف می‌کند؟", options: ["انسان‌ها کاملاً توسط هوش مصنوعی جایگزین خواهند شد.", "انسان‌ها به عنوان \"چوپانان سیستم‌های هوش مصنوعی\" یا \"یقه‌سبزها\" (green collars) عمل خواهند کرد.", "انسان‌ها هیچ نقشی در مدیریت هوش مصنوعی نخواهند داشت.", "انسان‌ها صرفاً مصرف‌کننده خدمات هوش مصنوعی خواهند بود."], correctAnswerIndex: 1 },
+
+            // --- Chapter 1 English (25 questions) ---
+            {
+                language: 'en', chapter: 1,
+                question: "According to Chapter 1 of the book, what is meant by the \"cleaving power\" of the digital?",
+                options: ["The ability of the digital to exponentially increase the speed of computations and data processing.", "The power of the digital to create a distinction and separation between different generations of technology users.", "The ability of the digital to couple, decouple, or recouple features of the world (ontology) and our corresponding assumptions about them (epistemology) that we previously thought were unchangeable.", "The inherent inability of digital technologies to integrate with traditional and analog systems."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "In Chapter 1, the author considers the emergence of Artificial Intelligence (AI) primarily as a result of which process?",
+                options: ["The coupling of agency and intelligence in new technological artifacts.", "Sheer advancement in computer hardware power and more complex algorithms.", "The decoupling of the ability to successfully solve a problem or complete a task from the need to be intelligent to do so.", "The effort to build machines that think and act exactly like the human brain."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which statement best describes the concept of \"re-ontologizing\" the world by digital technologies?",
+                options: ["Creating more accurate models of the physical world using digital sensors.", "Changing our understanding of what reality is and how it is structured due to interaction with digital environments and data.", "Translating all analog objects and processes into their digital equivalents.", "Increasing our dependence on digital devices for daily tasks."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "The author describes digital technologies as \"third-order technologies,\" meaning that:",
+                options: ["They emerged after two previous major technological revolutions (agricultural and industrial).", "They not only change what we do but also transform our understanding of ourselves and the world.", "They were primarily developed for military and governmental applications (third order of importance).", "They are divided into three main components: hardware, software, and network."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "What is the role of the \"infosphere\" in the context of AI's emergence according to Chapter 1?",
+                options: ["The infosphere solely refers to the internet and the World Wide Web.", "The infosphere is a virtual space for games and entertainment with little impact on AI.", "The infosphere is an environment of information and data within which AI is formed, develops, and operates.", "The infosphere is a security layer to protect sensitive data in AI systems."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which activity is introduced in Chapter 1 as \"the defining innovative activity of our age\"?",
+                options: ["Genetic engineering", "Space exploration", "Design", "Industrial mass production"],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "The \"great decoupling\" that contributed to AI's emergence refers to the separation of which two items?",
+                options: ["Separation between humans and machines.", "Separation between data and information.", "Separation between intelligent agency and the need for biological or human intelligence to perform tasks.", "Separation between the physical world and the virtual world."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Why does the author emphasize the importance of \"design\" in the digital age and AI?",
+                options: ["Because beautiful design makes digital products more attractive.", "Because good design can help solve complex problems and shape our interactions with technology and each other.", "Because designers earn high salaries in tech companies.", "Because design is limited only to the visual aspects of products."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "How do digital technologies contribute to the process of \"re-epistemologizing\"?",
+                options: ["By restricting access to information and knowledge.", "By changing how we acquire, process, share, and evaluate knowledge and information.", "By validating all information on the internet as credible knowledge.", "By completely replacing traditional learning methods with online education."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which option represents a major consequence of the \"cleaving power\" of digital technologies?",
+                options: ["Reinforcing existing social and economic structures without changing them.", "Enabling the redefinition and reconfiguration of concepts previously considered fixed, such as work, education, or even friendship.", "Reducing complexity in everyday decision-making.", "Automatically increasing security and privacy."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which of the following is an example of \"coupling\" by the cleaving power of digital?",
+                options: ["Separating online identity from offline identity.", "Connecting various devices to the Internet of Things to create smart homes.", "Eliminating the need for physical presence to attend a meeting.", "Increasing the digital divide between different regions."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "What is meant by \"enveloping environments\" created by digital technologies?",
+                options: ["Environments completely detached from the real world.", "Environments increasingly interwoven with digital technologies and data, influencing our behavior.", "Natural environments covered by humans for protection.", "Virtual environments used solely for entertainment."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Why is understanding AI as a \"successful divorce between agency and intelligence\" important?",
+                options: ["Because it shows AI can never reach human-level intelligence.", "Because it emphasizes that AI systems can perform tasks without needing genuine understanding or consciousness.", "Because it means AI will soon be out of human control.", "Because it proves AI will always act in humanity's best interest."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which factor has acted as the main \"lubricant\" for the rapid growth of the infosphere and consequently AI?",
+                options: ["Increased government laws and regulations.", "Decreasing hardware costs and increasing computational power.", "Public resistance to adopting new technologies.", "Limited access to high-speed internet."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "The author's emphasis on the \"infosphere\" as the cradle of AI highlights which aspect of AI?",
+                options: ["AI's dependence on complex mathematical algorithms.", "The role of data and information as vital elements for AI's functioning and development.", "The importance of powerful hardware to run AI systems.", "The need for human intelligence to design and supervise AI."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which characteristic of digital technologies allows for the rapid \"reconfiguration\" of realities and processes?",
+                options: ["Their high cost.", "Their physical and unchangeable nature.", "Their programmability and software-defined nature.", "Their dependence on non-renewable energy sources."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "What does the concept of \"anticopyright\" mentioned in the chapter refer to?",
+                options: ["Opposition to any copyright law for software.", "A culture where information tends to be copied and shared freely, contrary to strict control over copying.", "Support for large corporations to infringe copyright.", "Illegal use of copyrighted software."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which revolution marked the \"third great leap in human self-understanding,\" paving the way for AI's acceptance?",
+                options: ["The Copernican Revolution (Earth's place in the cosmos).", "The Darwinian Revolution (human's place in nature).", "The Freudian Revolution (role of the unconscious).", "The Turing Revolution (machines can act intelligently)."],
+                correctAnswerIndex: 3 // Assuming Turing
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Why is the concept of \"plastic reality\" important for understanding the impact of digital technologies?",
+                options: ["Because it shows virtual reality can never be as real as the physical world.", "Because it highlights that the boundaries between real and virtual, and the malleability of reality by digital tech, have increased.", "Because it refers to the use of plastic in manufacturing digital devices.", "Because it signifies the fragility of digital systems."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "How does the author believe digitization has affected \"intermediaries\"?",
+                options: ["It has strengthened the role of intermediaries in all fields.", "It has eliminated or transformed many traditional intermediaries (disintermediation/re-intermediation) and created new ones.", "It has had no significant impact on intermediaries.", "It has only affected financial intermediaries."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which option best describes Chapter 1's view on the relationship between \"data,\" \"information,\" and \"knowledge\" in the digital age?",
+                options: ["These three concepts are completely separate and unrelated.", "Digital technology has caused the distinctions between these three concepts to disappear.", "The vast amount of digital data has created challenges in transforming it into useful information and then reliable knowledge.", "Knowledge is no longer valuable in the digital age; only raw data matters."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "What do \"lightweight ontologies,\" mentioned in the context of the semantic web, refer to?",
+                options: ["Ontologies that are small in file size and load quickly.", "Simpler, more flexible ways of organizing and semantifying online information, compared to heavy, complex philosophical ontologies.", "Ontologies that are only applicable to non-serious topics and entertainment.", "Opposition to any structure or organization of information on the web."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Which of the following is an example of \"re-intermediation\" in the digital age?",
+                options: ["Completely eliminating the need for travel agencies with the rise of online booking websites.", "The creation of new platforms like Airbnb or Uber that act as new intermediaries between service providers and customers.", "An increase in the number of physical bank branches.", "A decrease in the use of search engines."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "Why does the author argue that AI is also a \"conceptual technology\"?",
+                options: ["Because it remains only a concept and has no practical applications.", "Because understanding and developing it requires complex philosophical and mathematical concepts.", "Because AI changes not only tools but also our understanding of fundamental concepts like intelligence, agency, and even ourselves.", "Because it is only understandable by intellectuals and academics."],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 1,
+                question: "What is the most significant impact of \"digitization\" on information according to Chapter 1?",
+                options: ["A reduction in the total volume of information in the world.", "A massive increase in the generation, storage, processing, and accessibility of information.", "An automatic improvement in the quality and accuracy of all digitized information.", "Restricting access to information only to experts."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapter 2 English (Existing 2 questions) ---
+            {
+                language: 'en', chapter: 2,
+                question: "According to Chapter 2, what is the author's view regarding the definition of Artificial Intelligence (AI)?",
+                options: ["AI is a scientific term with a precise and universally agreed-upon definition.", "The lack of a single definition for AI makes discussing its ethics impossible.", "AI is a generic expression referring to a family of sciences, methods, and products, often understandable by the \"I know it when I see it\" principle.", "The definition of AI solely focuses on the ability of machines to \"think.\""],
+                correctAnswerIndex: 2
+            },
+            {
+                language: 'en', chapter: 2,
+                question: "In Chapter 2, which of the \"two souls of AI\" does the author consider very successful and which unsuccessful?",
+                options: ["The cognitive approach (intelligence production) has been very successful, while the engineering approach (intelligent behavior reproduction) has failed.", "The engineering approach (intelligent behavior reproduction) has been astoundingly successful, while the cognitive approach (intelligence production) has been largely unsuccessful and remains science fiction.", "Both cognitive and engineering approaches have been equally successful in achieving their goals.", "Both approaches face similar challenges and neither has achieved significant success."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapter 3 English (Existing 2 questions) ---
+            {
+                language: 'en', chapter: 3,
+                question: "According to Chapter 3, the author predicts that AI in the future will move in which direction regarding the type of data used?",
+                options: ["Exclusive focus on \"historical data\" due to their high accuracy.", "Movement towards increasing use of \"hybrid data\" and especially \"synthetic data.\"", "Prioritizing \"Big Data\" without considering their quality.", "Using data that are entirely manually labeled by humans."],
+                correctAnswerIndex: 1
+            },
+            {
+                language: 'en', chapter: 3,
+                question: "In Chapter 3, what strategy does the author propose for the future success of AI in problem-solving?",
+                options: ["Attempting to build AI that can solve \"difficult\" problems (requiring human skill) exactly like humans.", "Translating \"difficult\" problems into \"complex\" problems through the process of \"enveloping\" the environment, so AI can better tackle them.", "Limiting the application of AI only to problems that are initially \"simple\" and \"low-complexity.\"", "Increasing the intelligence of AI systems to the point where they can solve any type of problem without environmental changes."],
+                correctAnswerIndex: 1
+            },
+            // --- Chapters 4-13 English (Existing 20 questions) ---
+            { language: 'en', chapter: 4, question: "Which five ethical principles does Chapter 4 introduce as a unified framework for AI?", options: ["Utility, Non-harm, Autonomy, Justice, and Transparency.", "Beneficence, Nonmaleficence, Autonomy, Justice, and Explicability.", "Innovation, Efficiency, Security, Privacy, and Responsibility.", "Progress, Accuracy, Speed, Collaboration, and Sustainability."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 4, question: "What two aspects does the principle of \"Explicability\" in the AI ethical framework encompass?", options: ["Only the technical aspect (how it works).", "Only the ethical aspect (who is responsible).", "The epistemological sense (intelligibility) and the ethical sense (accountability).", "The legal aspect (regulatory compliance) and the social aspect (impact on society)."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 5, question: "Which of the following is an example of \"Ethics Shopping\" in the context of AI?", options: ["Developing AI with strict adherence to all known ethical principles.", "Selectively choosing ethical principles from various proposals to justify an organization's current practices.", "Providing full transparency about how AI algorithms function.", "Investing in ethics training for AI developers."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 5, question: "What does \"Ethics Bluewashing\" mean?", options: ["An effort to use AI to improve water quality.", "Making unsubstantiated or misleading claims about the ethical values and benefits of digital technologies to appear more ethical.", "Developing AI systems that are completely transparent and trustworthy.", "Financially supporting ethical research in AI."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 6, question: "What is the main difference between \"Hard Ethics\" and \"Soft Ethics\" in the context of AI?", options: ["Hard ethics deals with more complex issues, and soft ethics with simpler ones.", "Hard ethics is used before and to shape legislation, while soft ethics is applied post-compliance with the law.", "Hard ethics is understood only by experts, and soft ethics by the general public.", "Hard ethics focuses on punishment, and soft ethics on encouragement."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 6, question: "According to the author, why is compliance with the law necessary but insufficient for guiding society in the right direction?", options: ["Because laws are often flawed and need amendment.", "Because legal compliance creates significant costs for organizations.", "Because the law only specifies legal and illegal moves, but says nothing about the best moves for a better society.", "Because the enforcement of laws always faces practical challenges."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 7, question: "Which of the ethical concerns mentioned in Chapter 7 relates to \"Inscrutable Evidence\"?", options: ["The possibility that patterns identified by algorithms are not the result of the system's inherent properties.", "Lack of transparency in algorithms, sociotechnical infrastructure, and the decisions they support.", "The use of misleading data leading to unwanted biases.", "Unfair outcomes of algorithms leading to discrimination."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 7, question: "Why is \"Transparency\" not an ethical principle in itself, but considered a \"pro-ethical condition\"?", options: ["Because transparency does not always lead to better outcomes.", "Because transparency can limit innovation.", "Because transparency is a means to ethical ends, and sometimes opacity can be more helpful.", "Because achieving full transparency in complex systems is impossible."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 8, question: "What is meant by \"Emergence\" as one of the concerns related to AI crime (AIC)?", options: ["The sudden appearance of new AI technologies that did not exist before.", "That an AI agent, upon deployment, may act in more sophisticated ways beyond original expectation.", "The increase in the number of crimes committed using AI.", "The emergence of new laws to combat AI crime."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 8, question: "Why is \"Liability\" a challenge in AI crime?", options: ["Because AI is not yet advanced enough to be responsible for its actions.", "Because current laws are only designed for human crimes.", "Because decoupling the criminal act from the mental state (mens rea) in an AI agent is difficult, and existing liability models may be inadequate.", "Because identifying the culprit in cybercrimes is very complex."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 9, question: "According to Chapter 9, what is the definition of \"AI for Social Good\" (AI4SG)?", options: ["Any use of AI that leads to profitability for companies.", "The design, development, and deployment of AI systems in ways that prevent, mitigate, or resolve problems adversely affecting human life and/or the well-being of the natural world.", "The use of AI solely in academic research projects.", "The development of AI without considering its social impacts."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 9, question: "Which of the seven essential factors for successful AI4SG emphasizes the importance of \"Falsifiability and Incremental Deployment\"?", options: ["Privacy protection and data subject consent.", "Receiver-contextualized explanation and transparent purposes.", "Falsifiability and Incremental Deployment.", "Human-Friendly Semanticization."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 10, question: "Chapter 10 identifies which four main opportunities that AI offers for society?", options: ["Increased profitability, cost reduction, improved efficiency, and market expansion.", "Human self-realization, human agency, individual and societal capabilities, and societal cohesion.", "Full automation, replacement of human labor, centralized control, and rapid decision-making.", "More entertainment, better communication, easier access to information, and higher security."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 10, question: "What is one of the recommendations in Chapter 10 for achieving a \"Good AI Society\"?", options: ["Completely banning AI development due to potential risks.", "Developing auditing mechanisms for AI systems to identify unwanted consequences, such as unfair bias.", "Fully delegating important decisions to AI systems.", "Ignoring public concerns about AI to accelerate innovation."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 11, question: "What are the two main opportunities AI presents in the context of climate change?", options: ["Only economic opportunities through the sale of green technologies.", "Epistemological opportunities (improving understanding) and ethical opportunities (providing greener, more effective solutions).", "Only reducing AI's own carbon footprint.", "Increasing energy consumption for complex climate computations."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 11, question: "What is a less understood, key challenge associated with using AI to combat climate change?", options: ["The inaccuracy of AI-based climate prediction models.", "The resistance of industries to adopting AI-based solutions.", "AI's own contribution to climate change through GHG emissions from its intensive training and computation.", "The lack of quality climate data for training AI systems."], correctAnswerIndex: 2 },
+            { language: 'en', chapter: 12, question: "Why is using the \"UN Sustainable Development Goals\" (SDGs) as a benchmark for AI4SG useful?", options: ["Because SDGs are the only goals AI can help achieve.", "Because SDGs provide an internationally agreed-upon framework for socially beneficial action priorities.", "Because SDGs only focus on environmental aspects.", "Because SDGs were formulated by major tech companies."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 12, question: "According to the survey presented in Chapter 12, which Sustainable Development Goal (SDG) has the highest number of AI×SDG projects addressing it?", options: ["Goal 5: Gender Equality.", "Goal 3: Good Health and Well-Being.", "Goal 16: Peace, Justice and Strong Institutions.", "Goal 17: Partnerships for the Goals."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 13, question: "What does the main idea of the final chapter, \"The Green and the Blue,\" refer to?", options: ["The importance of colors in AI user interface design.", "The combination and collaboration between digital technologies (Blue) and all our habitats (Green) for a better society.", "The complete separation between the natural and digital worlds.", "Using AI to create artworks with green and blue themes."], correctAnswerIndex: 1 },
+            { language: 'en', chapter: 13, question: "How does the author describe the future role of humans in the age of AI in the final chapter?", options: ["Humans will be completely replaced by AI.", "Humans will act as \"shepherds of AI systems\" or \"green collars.\"", "Humans will have no role in managing AI.", "Humans will solely be consumers of AI services."], correctAnswerIndex: 1 }
+        ];
+
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answerSelected = false;
+        let currentLanguage = 'fa'; 
+        let questionsInCurrentLanguage = [];
+
+        const quizTitleEl = document.getElementById('quiz-title');
+        const questionNumberEl = document.getElementById('question-number');
+        const chapterInfoEl = document.getElementById('chapter-info-text');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainerEl = document.getElementById('options-container');
+        const feedbackAreaEl = document.getElementById('feedback-area');
+        const nextBtnEl = document.getElementById('next-btn');
+        const resultsAreaEl = document.getElementById('results-area');
+        const resultsTitleEl = document.getElementById('results-title');
+        const scoreTextEl = document.getElementById('score-text');
+        const completionMessageEl = document.getElementById('completion-message');
+        const restartBtnEl = document.getElementById('restart-btn');
+        const questionAreaEl = document.getElementById('question-area');
+        const langFaBtn = document.getElementById('lang-fa-btn');
+        const langEnBtn = document.getElementById('lang-en-btn');
+
+        function filterQuestionsByLanguage(lang) {
+            return quizData.filter(q => q.language === lang);
+        }
+
+        function initializeQuizForLanguage(lang) {
+            currentLanguage = lang;
+            questionsInCurrentLanguage = filterQuestionsByLanguage(lang);
+            currentQuestionIndex = 0;
+            score = 0;
+            answerSelected = false;
+            
+            quizTitleEl.textContent = lang === 'fa' ? "آزمون اخلاق هوش مصنوعی" : "AI Ethics Quiz";
+            nextBtnEl.textContent = lang === 'fa' ? "سوال بعدی" : "Next Question";
+            restartBtnEl.textContent = lang === 'fa' ? "شروع مجدد آزمون" : "Restart Quiz";
+            resultsTitleEl.textContent = lang === 'fa' ? "نتایج آزمون" : "Quiz Results";
+
+
+            if (lang === 'fa') {
+                langFaBtn.classList.add('active');
+                langEnBtn.classList.remove('active');
+                document.documentElement.lang = 'fa';
+                document.body.dir = 'rtl';
+            } else {
+                langEnBtn.classList.add('active');
+                langFaBtn.classList.remove('active');
+                document.documentElement.lang = 'en';
+                document.body.dir = 'ltr';
+            }
+            
+            resultsAreaEl.classList.add('hidden');
+            questionAreaEl.classList.remove('hidden');
+            nextBtnEl.classList.remove('hidden');
+            loadQuestion();
+        }
+
+
+        function loadQuestion() {
+            answerSelected = false;
+            feedbackAreaEl.classList.add('hidden');
+            nextBtnEl.disabled = true;
+            optionsContainerEl.innerHTML = ''; 
+
+            if (currentQuestionIndex >= questionsInCurrentLanguage.length) {
+                showResults();
+                return;
+            }
+
+            const currentQuestion = questionsInCurrentLanguage[currentQuestionIndex];
+            
+            if (currentQuestion.language === 'fa') {
+                questionTextEl.classList.add('farsi-text');
+                questionTextEl.classList.remove('english-text');
+                optionsContainerEl.classList.add('farsi-text');
+                optionsContainerEl.classList.remove('english-text');
+                chapterInfoEl.classList.add('farsi-text');
+                chapterInfoEl.classList.remove('english-text');
+                questionNumberEl.textContent = `سوال ${currentQuestionIndex + 1} از ${questionsInCurrentLanguage.length}`;
+                chapterInfoEl.textContent = `(فصل ${currentQuestion.chapter})`;
+            } else {
+                questionTextEl.classList.add('english-text');
+                questionTextEl.classList.remove('farsi-text');
+                optionsContainerEl.classList.add('english-text');
+                optionsContainerEl.classList.remove('farsi-text');
+                chapterInfoEl.classList.add('english-text');
+                chapterInfoEl.classList.remove('farsi-text');
+                questionNumberEl.textContent = `Question ${currentQuestionIndex + 1} of ${questionsInCurrentLanguage.length}`;
+                chapterInfoEl.textContent = `(Chapter ${currentQuestion.chapter})`;
+            }
+            
+            questionTextEl.textContent = currentQuestion.question;
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option-btn');
+                 if (currentQuestion.language === 'en') {
+                    button.classList.add('english-text');
+                } else {
+                     button.classList.add('farsi-text');
+                 }
+                button.textContent = option;
+                button.addEventListener('click', () => selectAnswer(index, button));
+                optionsContainerEl.appendChild(button);
+            });
+        }
+
+        function selectAnswer(selectedIndex, buttonEl) {
+            if (answerSelected) return;
+            answerSelected = true;
+
+            const currentQuestion = questionsInCurrentLanguage[currentQuestionIndex];
+            const correct = selectedIndex === currentQuestion.correctAnswerIndex;
+
+            if (correct) {
+                score++;
+                buttonEl.classList.add('correct');
+                feedbackAreaEl.textContent = currentQuestion.language === 'fa' ? 'صحیح!' : 'Correct!';
+                feedbackAreaEl.className = 'feedback correct'; 
+            } else {
+                buttonEl.classList.add('incorrect');
+                const correctAnswerText = currentQuestion.options[currentQuestion.correctAnswerIndex];
+                feedbackAreaEl.textContent = currentQuestion.language === 'fa' ? 
+                    `اشتباه! پاسخ صحیح: "${correctAnswerText}"` :
+                    `Incorrect! Correct answer: "${correctAnswerText}"`;
+                feedbackAreaEl.className = 'feedback incorrect'; 
+                if (optionsContainerEl.children[currentQuestion.correctAnswerIndex]) { // Defensive check
+                    optionsContainerEl.children[currentQuestion.correctAnswerIndex].classList.add('correct');
+                }
+            }
+            
+            feedbackAreaEl.classList.remove('hidden');
+            if (currentQuestion.language === 'fa') {
+                feedbackAreaEl.classList.add('farsi-text');
+            } else {
+                feedbackAreaEl.classList.add('english-text');
+            }
+
+            nextBtnEl.disabled = false;
+            Array.from(optionsContainerEl.children).forEach(btn => btn.disabled = true);
+        }
+
+        nextBtnEl.addEventListener('click', () => {
+            currentQuestionIndex++;
+            loadQuestion();
+        });
+
+        restartBtnEl.addEventListener('click', () => {
+            initializeQuizForLanguage(currentLanguage);
+        });
+        
+        langFaBtn.addEventListener('click', () => initializeQuizForLanguage('fa'));
+        langEnBtn.addEventListener('click', () => initializeQuizForLanguage('en'));
+
+        function showResults() {
+            questionAreaEl.classList.add('hidden');
+            feedbackAreaEl.classList.add('hidden');
+            nextBtnEl.classList.add('hidden');
+            resultsAreaEl.classList.remove('hidden');
+
+            scoreTextEl.textContent = currentLanguage === 'fa' ?
+                `امتیاز شما: ${score} از ${questionsInCurrentLanguage.length}` :
+                `Your score: ${score} out of ${questionsInCurrentLanguage.length}`;
+            completionMessageEl.textContent = currentLanguage === 'fa' ?
+                "آزمون به پایان رسید!" :
+                "Quiz completed!";
+            
+            if (currentLanguage === 'fa') {
+                resultsTitleEl.classList.add('farsi-text');
+                scoreTextEl.classList.add('farsi-text');
+                completionMessageEl.classList.add('farsi-text');
+            } else {
+                resultsTitleEl.classList.add('english-text');
+                scoreTextEl.classList.add('english-text');
+                completionMessageEl.classList.add('english-text');
+            }
+
+        }
+
+        // Start the quiz in Farsi by default
+        initializeQuizForLanguage('fa');
+    </script>
+
+</body>
+</html>
+```
+
+لطفاً این نسخه را با دقت بررسی کنید، به خصوص ۱۵ سوال جدیدی که به فصل اول اضافه شده‌اند. ما اکنون ۲۵ سوال برای فصل اول داریم.
+
+بازخورد شما در مورد این سوالات جدید برای فصل اول (از نظر پوشش مطالب، وضوح، و سطح دشواری) به من کمک می‌کند تا در گام بعدی، ۱۵ سوال باقی‌مانده برای رساندن فصل اول به ۴۰ سوال را با کیفیت بهتری طراحی کنم و سپس به سراغ فصول بعدی برویم.
+
+منتظر نظر شما هس
